@@ -46,6 +46,17 @@ class LandingAPI(APIView):
         except Exception as e:
             # Manejo de errores generales
             return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+    def delete(self, request, pk):
+	try:
+	    ref = db.reference(f'{self.collection_name}/{pk}')
+	    data = ref.get()
+	    if not data:
+		return Response({"error": "Item not Found"}, status=status.HTTP_404_NOT_FOUND)
+	    ref.delete()
+	    return Response(status=status.HTTP_204_NO_CONTENT)
+	except Exception as e:
+	    return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
     
     def post(self, request):
 	        
