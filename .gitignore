@@ -171,5 +171,8 @@ cython_debug/
 # PyPI configuration file
 .pypirc
 
-#OS
+# OS
 .DS_Store
+
+# Keys
+keys/
