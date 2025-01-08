@@ -26,6 +26,26 @@ class LandingAPI(APIView):
 
         # Devuelve un arreglo JSON
         return Response(data, status=status.HTTP_200_OK)
+
+    def getASingleElement (self, request, pk):
+        """Obtiene un elemento específico identificado por pk."""
+        try:
+            # Referencia al elemento con la clave primaria (pk)
+            ref = db.reference(f'{self.collection_name}/{pk}')
+
+            # Obtiene los datos del elemento
+            data = ref.get()
+
+            # Si no se encuentra, devolver un error 404
+            if not data:
+                return Response({"error": "Elemento no encontrado"}, status=status.HTTP_404_NOT_FOUND)
+
+            # Devuelve el elemento encontrado
+            return Response(data, status=status.HTTP_200_OK)
+
+        except Exception as e:
+            # Manejo de errores generales
+            return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
     
     def post(self, request):
 	        
