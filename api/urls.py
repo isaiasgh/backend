@@ -3,5 +3,5 @@ from . import views
 
 urlpatterns = [
     path('v1/landing/', views.LandingAPI.as_view(), name='firebase_resources' ),
-    path('v1/landing/<str:pk>/', views.LandingAPI.as_view(), name='firebase_resource_detail'),
+    path('v1/landing/<str:pk>/', views.DetailedLandingAPI.as_view(), name='firebase_resource_detail'),
 ]
